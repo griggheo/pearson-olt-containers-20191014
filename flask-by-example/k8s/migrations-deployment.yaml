@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose-production-no-wait.yaml
+    kompose.version: 1.16.0 (0c01309)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: migrations
+  name: migrations
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: migrations
+    spec:
+      containers:
+      - args:
+        - python
+        - manage.py
+        - db
+        - upgrade
+        env:
+        - name: APP_SETTINGS
+          value: config.ProductionConfig
+        - name: DATABASE_URL
+          value: postgresql://wordcount_dbadmin:@db/wordcount
+        image: griggheo/flask-by-example:production-no-wait
+        name: migrations
+        resources: {}
+      restartPolicy: Always
+status: {}

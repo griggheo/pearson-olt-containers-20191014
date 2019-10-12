@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose-production-no-wait.yaml
+    kompose.version: 1.16.0 (0c01309)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: worker
+  name: worker
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: worker
+    spec:
+      containers:
+      - args:
+        - python
+        - worker.py
+        env:
+        - name: APP_SETTINGS
+          value: config.ProductionConfig
+        - name: DATABASE_URL
+          value: postgresql://wordcount_dbadmin:@db/wordcount
+        - name: REDISTOGO_URL
+          value: redis://redis:6379
+        image: griggheo/flask-by-example:production-no-wait
+        name: worker
+        resources: {}
+      restartPolicy: Always
+status: {}
