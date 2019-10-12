@@ -1,7 +1,7 @@
 version: "3"
 services:
   app:
-    image: griggheo/flask-by-example:production-no-wait
+    image: griggheo/flask-by-example:production
     command: "manage.py runserver --host=0.0.0.0"
     ports:
       - "5000:5000"
@@ -13,8 +13,8 @@ services:
       - db
       - redis
   worker:
-    image: griggheo/flask-by-example:production-no-wait
-    command: "python worker.py"
+    image: griggheo/flask-by-example:production
+    command: "worker.py"
     environment:
       APP_SETTINGS: config.ProductionConfig
       DATABASE_URL: postgresql://wordcount_dbadmin:$DBPASS@db/wordcount
@@ -23,8 +23,8 @@ services:
       - db
       - redis
   migrations:
-    image: griggheo/flask-by-example:production-no-wait
-    command: "python manage.py db upgrade"
+    image: griggheo/flask-by-example:production
+    command: "manage.py db upgrade"
     environment:
       APP_SETTINGS: config.ProductionConfig
       DATABASE_URL: postgresql://wordcount_dbadmin:$DBPASS@db/wordcount

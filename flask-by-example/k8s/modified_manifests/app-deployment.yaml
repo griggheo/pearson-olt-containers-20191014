@@ -32,7 +32,7 @@ spec:
               key: dbpass
         - name: DATABASE_URL
           value: postgresql://wordcount_dbadmin:${DBPASS}@db/wordcount
-        image: griggheo/flask-by-example:production-no-wait
+        image: griggheo/flask-by-example:production
         name: migrations
         resources: {}
       containers:
@@ -52,7 +52,7 @@ spec:
           value: postgresql://wordcount_dbadmin:${DBPASS}@db/wordcount
         - name: REDISTOGO_URL
           value: redis://redis:6379
-        image: griggheo/flask-by-example:production-no-wait
+        image: griggheo/flask-by-example:production
         name: app
         ports:
         - containerPort: 5000

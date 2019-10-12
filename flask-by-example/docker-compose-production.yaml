@@ -2,38 +2,32 @@ version: "3"
 services:
   app:
     image: griggheo/flask-by-example:production
-    command: sh -c "/wait && python manage.py runserver --host=0.0.0.0"
+    command: "manage.py runserver --host=0.0.0.0"
     ports:
       - "5000:5000"
     environment:
       APP_SETTINGS: config.ProductionConfig
       DATABASE_URL: postgresql://wordcount_dbadmin:$DBPASS@db/wordcount
       REDISTOGO_URL: redis://redis:6379
-      WAIT_HOSTS: db:5432
-      WAIT_BEFORE_HOSTS: 20
     depends_on:
       - db
       - redis
   worker:
     image: griggheo/flask-by-example:production
-    command: sh -c "/wait && python worker.py"
+    command: "worker.py"
     environment:
       APP_SETTINGS: config.ProductionConfig
       DATABASE_URL: postgresql://wordcount_dbadmin:$DBPASS@db/wordcount
       REDISTOGO_URL: redis://redis:6379
-      WAIT_HOSTS: redis:6379, db:5432
-      WAIT_BEFORE_HOSTS: 20
     depends_on:
       - db
       - redis
   migrations:
     image: griggheo/flask-by-example:production
-    command: sh -c "/wait && python manage.py db upgrade"
+    command: "manage.py db upgrade"
     environment:
       APP_SETTINGS: config.ProductionConfig
       DATABASE_URL: postgresql://wordcount_dbadmin:$DBPASS@db/wordcount
-      WAIT_HOSTS: db:5432
-      WAIT_BEFORE_HOSTS: 20
     depends_on:
       - db
   db:
