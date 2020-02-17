@@ -21,6 +21,9 @@ spec:
       containers:
       - image: postgres:11
         name: postgres
+        envFrom:
+          - secretRef:
+              name: fbe-secret
         ports:
         - containerPort: 5432
         resources: {}

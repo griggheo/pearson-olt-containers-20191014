@@ -1,0 +1,3 @@
+#!/bin/sh
+
+sops --pgp E14104A0890994B9AC9C9F6782C1FF5E679EFF32 secretfile

@@ -1,3 +1,4 @@
 #!/bin/bash
 
-kubectl exec -it db-67659d85bf-72mqx  -n demo --  psql -U postgres -c 'CREATE DATABASE wordcount'
+POD_ID=$1
+kubectl exec -it $POD_ID --  psql -U postgres -c 'CREATE DATABASE wordcount'

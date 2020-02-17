@@ -9,7 +9,7 @@ metadata:
     io.kompose.service: app
   name: app
 spec:
-  replicas: 1
+  replicas: 2
   strategy: {}
   template:
     metadata:
@@ -29,9 +29,9 @@ spec:
           valueFrom:
             secretKeyRef:
               name: fbe-secret
-              key: dbpass
+              key: DBPASS
         - name: DATABASE_URL
-          value: postgresql://wordcount_dbadmin:${DBPASS}@db/wordcount
+          value: postgresql://wordcount_dbadmin:$(DBPASS)@db/wordcount
         image: griggheo/flask-by-example:production
         name: migrations
         resources: {}
@@ -47,9 +47,9 @@ spec:
           valueFrom:
             secretKeyRef:
               name: fbe-secret
-              key: dbpass
+              key: DBPASS
         - name: DATABASE_URL
-          value: postgresql://wordcount_dbadmin:${DBPASS}@db/wordcount
+          value: postgresql://wordcount_dbadmin:$(DBPASS)@db/wordcount
         - name: REDISTOGO_URL
           value: redis://redis:6379
         image: griggheo/flask-by-example:production

@@ -1,3 +1,4 @@
 #!/bin/bash
 
-docker-compose exec db psql -U postgres wordcount -c "\dt"
+POD_ID=$1
+kubectl exec -it $POD_ID -- psql -U postgres wordcount -c "\dt"

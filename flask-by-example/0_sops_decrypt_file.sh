@@ -1,3 +1,4 @@
 #!/bin/sh
 
-sops -d secretfile
+FILENAME=$1
+sops -d $FILENAME

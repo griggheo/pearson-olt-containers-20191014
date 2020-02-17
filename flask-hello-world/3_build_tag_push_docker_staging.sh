@@ -3,9 +3,9 @@
 cp Dockerfile.staging Dockerfile
 
 # run `docker login` if needed
-docker build -t flask-hello-world:v1 .
-docker tag flask-hello-world:v1 griggheo/flask-hello-world:v1
-docker push griggheo/flask-hello-world:v1
+docker build -t flask-hello-world:20200218 .
+docker tag flask-hello-world:20200218 griggheo/flask-hello-world:20200218
+docker push griggheo/flask-hello-world:20200218
 
 docker images
 

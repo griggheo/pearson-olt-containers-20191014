@@ -41,6 +41,8 @@ services:
     container_name: "postgres"
     ports:
       - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
     volumes:
       - dbdata:/var/lib/postgresql/data
   redis:

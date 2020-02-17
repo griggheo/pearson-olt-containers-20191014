@@ -69,8 +69,8 @@ def count_and_save_words(url):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    #return 'Index Page - Hello to everybody'
     return render_template('index.html')
+    #return 'Index Page - Hello to everybody'
 
 
 @app.route('/start', methods=['POST'])
