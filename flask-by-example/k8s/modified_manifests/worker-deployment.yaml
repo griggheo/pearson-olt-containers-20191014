@@ -20,12 +20,14 @@ spec:
       containers:
       - args:
         - worker.py
-        envFrom:
-          - secretRef:
-              name: fbe-secret
         env:
         - name: APP_SETTINGS
           value: config.ProductionConfig
+        - name: DBPASS
+          valueFrom:
+            secretKeyRef:
+              name: fbe-secret
+              key: DBPASS
         - name: DATABASE_URL
           value: postgresql://wordcount_dbadmin:$(DBPASS)@db/wordcount
         - name: REDISTOGO_URL
